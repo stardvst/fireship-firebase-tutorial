@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   const app = firebase.app();
   console.log(app);
+
+  const db = firebase.firestore();
+
+  const post = db.collection('posts').doc('firstpost');
+  post.get()
+    .then(doc => {
+      const data = doc.data();
+      document.write(`${data.title}<br>${data.views}`);
+    })
 });
 
 const googleLogin = () => {
