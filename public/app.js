@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     doc => {
       console.log('zdes')
       const data = doc.data();
-      document.write(`${data.title}<br>${data.views}`);
+      document.querySelector('#title').innerHTML = data.title;
     })
 });
 
@@ -22,4 +22,10 @@ const googleLogin = () => {
       console.log(user);
     })
     .catch(console.log);
+}
+
+const updatePost = (event) => {
+  const db = firebase.firestore();
+  const post = db.collection('posts').doc('firstpost');
+  post.update({ title: event.target.value });
 }
