@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const db = firebase.firestore();
 
   const post = db.collection('posts').doc('firstpost');
-  post.get()
-    .then(doc => {
+  post.onSnapshot(
+    doc => {
+      console.log('zdes')
       const data = doc.data();
       document.write(`${data.title}<br>${data.views}`);
     })
