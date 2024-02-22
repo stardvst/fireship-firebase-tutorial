@@ -11,6 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = doc.data();
       document.querySelector('#title').innerHTML = data.title;
     })
+
+  const productsRef = db.collection('products');
+  const query = productsRef.where('price', '>', 10).orderBy('price', 'desc');
+  query.get()
+    .then(products => {
+      products.forEach(doc => {
+        const data = doc.data();
+        document.querySelector('#products').innerHTML += `${data.name} at $${data.price}<br>`;
+      })
+    })
 });
 
 const googleLogin = () => {
