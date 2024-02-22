@@ -39,3 +39,17 @@ const updatePost = (event) => {
   const post = db.collection('posts').doc('firstpost');
   post.update({ title: event.target.value });
 }
+
+const uploadFile = (files) => {
+  const file = files.item(0);
+
+  const storageRef = firebase.storage().ref();
+  const fileRef = storageRef.child(file.name);
+
+  const task = fileRef.put(file);
+  task.then(snapshot => {
+    console.log(snapshot);
+    const url = snapshot.downloadURL;
+    document.querySelector('#imgUpload').setAttribute('src', url);
+  })
+}
